@@ -1,60 +1,42 @@
-const G = 9.81
-const K = 100
-const mass = 10
-const springLength = 10
-const meter = 25
+const PI  = Math.PI
+const PI2 = Math.PI * 2
 
-let pointOfRotation;
-let position;
-let velocity;
+let time = 0
 
-function setup() {
-    createCanvas(window.innerWidth, window.innerHeight)
+let innerWheelRadius = 100
 
-    pointOfRotation = createVector(0, 0)
-    position = createVector(-2, -2)
-    velocity = createVector(0, 0)
-}
-
-function update(dt) {
-    let springPull = K * ( pointOfRotation.dist(position) - springLength )
-    let angle = -position.heading()
-
-    let force = {
-        x: -springPull * Math.cos(angle),
-        y: springPull * Math.sin(angle) - mass * G
-    }
-
-    velocity.x += force.x / mass * dt
-    velocity.y += force.y / mass * dt
-
-    position.x += velocity.x * dt
-    position.y += velocity.y * dt
+function setup(){
+    createCanvas(innerWidth, innerHeight, WEBGL)
 }
 
 function draw() {
-    if (deltaTime !== 0) {
-        let dt = deltaTime / 1000
+    time += deltaTime
 
-        dt /= 5
+    let y = time / 100
+    let θ = y / (100 * PI2)
 
-        update(dt)
-    }
+    background(0, 100, 200)
 
-    // 
+    // translate(0,-innerHeight / 4)
 
-    clear()
-    
-    translate(
-        window.innerWidth / 2,
-        100 // window.innerHeight / 2
-    )
+    rotateZ(Math.PI / 2)
+    rotateX(Math.PI / 2 + Math.PI / 6)
 
-    line(
-        pointOfRotation.x * meter, -pointOfRotation.y * meter,
-        position.x * meter, -position.y * meter
-    )
+    push()
+        rotateY(θ)
 
-    circle(pointOfRotation.x * meter, -pointOfRotation.y * meter, 10)
-    circle(position.x * meter, -position.y * meter, 10)
+        cylinder(200, 50, 24, 1)
+        
+        translate(0,50)
+        cylinder(innerWheelRadius, 50, 24, 1)
+    pop()
+
+    push()
+        translate(y + 300,50,100)
+        box(100)
+    pop()
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight)
 }

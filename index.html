@@ -13,13 +13,19 @@
             canvas {
                 position: fixed;
                 top: 0px;
+                left: 0px;
                 z-index: -1;
             }
 
             .overlay {
-                z-index: 10;
                 padding: 10px;
                 width: 300px;
+            }
+            
+            #states {
+                padding: 10px;
+                width: 300px;
+                float: right;
             }
 
             .slidecontainer {
@@ -121,14 +127,26 @@
                 content:'START';
             }
         </style>
+
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+        <script>
+            MathJax = {
+                tex: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']]
+                }
+            };
+        </script>
+
+        <!-- import p5.js, the graphics library were using -->
+        <script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.min.js"></script>
     </head>
     <body>
-        <script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.min.js">//https://cdn.jsdelivr.net/npm/p5/lib/</script>
         <script src="index.js" type=></script>
 
         <div class="overlay">
             <div class="slidecontainer">
-                Pulley Radius:
+                <p>Pulley Radius: <span id="pulleyRad"></span> M</p>
                 <input
                     type="range" class="slider" id="innerWheelRadius"
                     min="0" max="100" value="50" step="1"
@@ -136,7 +154,7 @@
                 >
             </div>
             <div class="slidecontainer">
-                Hanging Mass:
+                <p>Hanging Mass: <span id="HMass"></span> Kg</p>
                 <input
                     type="range" class="slider" id="mass"
                     min="1" max="1000" value="100" step="1"
@@ -144,7 +162,7 @@
                 >
             </div>
             <div class="slidecontainer">
-                Rotating Masses Mass:
+                <p>Rotating Masses Mass: <span id="RMass"></span> Kg</p>
                 <input
                     type="range" class="slider" id="adjustableMass"
                     min="1" max="100" value="10" step="1"
@@ -152,7 +170,7 @@
                 >
             </div>
             <div class="slidecontainer">
-                Rotating Masses Distance From Center:
+                <p>Rotating Masses Distance From Center: <span id="RMassDist"></span> M</p>
                 <input
                     type="range" class="slider" id="adjustableMassRadius"
                     min="0" max="100" value="50" step="1"
@@ -160,7 +178,7 @@
                 >
             </div>
             <div class="slidecontainer">
-                Time:
+                <p>Time: <span id="timeDisplay"></span> s</p>
                 <input
                     type="range" class="slider" id="time"
                     min="0" max="60" value="0" step="1"
@@ -170,5 +188,18 @@
                 <label class="switch"><input type="checkbox" id="togBtn"><div class="slide round"></div></label>
             </div>
         </div>
+
+        <div id="stats">
+            <p>Moment of inertia: <span id="momentOfInertia"></span> KgM²</p>
+            <p>Aceleration: <span id="aceleration"></span> M/s²</p>
+        </div>
+
+        <div id="equations">
+            $ma = mg - T$<br>
+            $a = \frac{mg}{m + \frac{I}{r}}$
+        </div>
+
+        <!-- renders all the LaTex equations -->
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

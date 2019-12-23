@@ -1,5 +1,5 @@
 const g = 9.81
-const density = .001 // density of materials
+const density = .0001 // density of materials
 
 let mass     = 0 // set with slider
 let massSize = 0 // calculated using mass
@@ -44,6 +44,14 @@ function calculateVariables() {
 
     // save the acceleration
     aceleration = mass * g / (mass + momentOfInertia / innerWheelRadius ** 2)
+
+    //display values on page
+    document.getElementById("momentOfInertia").innerHTML = Math.round(momentOfInertia)
+    document.getElementById("aceleration").innerHTML = Math.round(aceleration * 100) / 100
+    document.getElementById("pulleyRad").innerHTML = Math.round(innerWheelRadius)
+    document.getElementById("HMass").innerHTML = Math.round(mass)
+    document.getElementById("RMass").innerHTML = Math.round(adjustableMass)
+    document.getElementById("RMassDist").innerHTML = Math.round(adjustableMassRadius)
 }
 
 //////////////////
@@ -67,12 +75,9 @@ function setup(){
     // initilize varables
     calculateVariables()
 
-    document.getElementById("time").onmousedown = () => {
-        timeSlide = true
-    }
-    document.getElementById("time").onmouseup = () => {
-        timeSlide = false
-    }
+    // figure out if the time slider is being draged or not
+    document.getElementById("time").onmousedown = () => { timeSlide = true }
+    document.getElementById("time").onmouseup = () => { timeSlide = false }
 
     // dont draw the polygones
     noStroke()
@@ -85,6 +90,7 @@ function draw() {
     } else if (!document.getElementById("togBtn").checked) {
         time += deltaTime / 1000
         document.getElementById("time").value = time
+        document.getElementById("timeDisplay").innerHTML = Math.round(time)
     }
 
     // calculate the y position and the angle
@@ -119,6 +125,9 @@ function draw() {
 
     // draw the mass
     drawMass(y, θ)
+
+    //draw the table and supports
+    drawTable()
 }
 
 function drawWheels(y, θ) {
@@ -170,7 +179,6 @@ function drawAdjustableMass(y, θ) {
 
         pop()
     }
-    
 
     pop()
 }
@@ -191,9 +199,65 @@ function drawMass(y, θ) {
 
     // shift it to correct position
     translate(y, wheelWidth, innerWheelRadius)
-
+    
     // draw the box
     box(massSize)
+
+    pop()
+}
+
+function drawTable(){
+    push()
+
+    //the center rod
+    push()
+    //shift to correct position for center rod
+    translate(0, -65, 0)
+    //draw the rod
+    cylinder(10, 150, 40)
+    pop()
+    
+    //the stand center
+    push()
+    //shift to correct position for center rod
+    translate(0, -120, 0)
+    //draw the rod
+    cylinder(80, 42, 40)
+    pop()
+
+    //the right support
+    push()
+    //shift to correct position for tabletop
+    translate(250, -120, 0)
+    rotateY(PI/3)
+    //draw the tabletop
+    box(20, 37, 600)
+    pop()
+
+    //the left support
+    push()
+    //shift to correct position for tabletop
+    translate(250, -120, 0)
+    rotateY(-PI/3)
+    //draw the tabletop
+    box(20, 38, 600)
+    pop()
+
+    //the top support
+    push()
+    //shift to correct position for tabletop
+    translate(20, -120, 0)
+    //draw the tabletop
+    box(50, 40, 300)
+    pop()
+
+    //the tabletop
+    push()
+    //shift to correct position for tabletop
+    translate(500, -120, 0)
+    //draw the tabletop
+    box(30, 100, 800)
+    pop()
 
     pop()
 }

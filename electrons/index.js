@@ -102,7 +102,8 @@ function calculateField(position) {
                 (K * charge.q) / position.distSq(charge)
             )
         )
-    , new Charge(0, 0)).normalize().mul(10)
+    , new Charge(0, 0))
+        .normalize().mul(10)
 }
 
 function setup(){

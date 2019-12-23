@@ -5,11 +5,197 @@
             body {
                 margin: 0px;
                 overflow: hidden;
+
+                color: whitesmoke;
+                font-size: large;
+            }
+
+            canvas {
+                position: fixed;
+                top: 0px;
+                z-index: -1;
+            }
+
+            .overlay {
+                z-index: 10;
+                padding: 10px;
+                width: 300px;
+            }
+
+            .slidecontainer {
+                padding-bottom: 15px;
+            }
+
+            .slider {
+                -webkit-appearance: none;
+                width: 100%;
+                height: 15px;
+                border-radius: 5px;  
+                background: #d3d3d3;
+                outline: none;
+                opacity: 0.7;
+                -webkit-transition: .2s;
+                transition: opacity .2s;
+            }
+
+            .slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 25px;
+                height: 25px;
+                border-radius: 50%; 
+                background: #4CAF50;
+                cursor: pointer;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                background: #4CAF50;
+                cursor: pointer;
+            }
+            /* checkbox style */
+            .switch {
+            position: relative;
+            display: inline-block;
+            width: 100px;
+            height: 34px;
+            }
+
+            .switch input {display:none;}
+
+            .slide {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ca2222;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+            }
+
+            .slide:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+            }
+
+            input:checked + .slide {
+            background-color: #2ab934;
+            }
+
+            input:focus + .slide {
+            box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked + .slide:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(66px);
+            }
+
+            .slide:after
+            {
+            content:'STOP';
+            color: white;
+            display: block;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 50%;
+            font-size: 10px;
+            font-family: Verdana, sans-serif;
+            }
+
+            input:checked + .slide:after
+            {  
+            content:'START';
+            }
+
+            /* reset button */
+            .button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+            }
+
+            .button:hover {background-color: #3e8e41}
+
+            .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
             }
         </style>
     </head>
     <body>
         <script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.min.js">//https://cdn.jsdelivr.net/npm/p5/lib/</script>
         <script src="index.js" type=></script>
+
+        <div class="overlay">
+            <div class="slidecontainer">
+                Pulley Radius:
+                <input
+                    type="range" class="slider" id="innerWheelRadius"
+                    min="0" max="100" value="50" step="1"
+                    oninput="calculateVariables()"
+                >
+            </div>
+            <div class="slidecontainer">
+                Hanging Mass:
+                <input
+                    type="range" class="slider" id="mass"
+                    min="1" max="1000" value="100" step="1"
+                    oninput="calculateVariables()"
+                >
+            </div>
+            <div class="slidecontainer">
+                Rotating Masses Mass:
+                <input
+                    type="range" class="slider" id="adjustableMass"
+                    min="1" max="100" value="10" step="1"
+                    oninput="calculateVariables()"
+                >
+            </div>
+            <div class="slidecontainer">
+                Rotating Masses Distance From Center:
+                <input
+                    type="range" class="slider" id="adjustableMassRadius"
+                    min="0" max="100" value="50" step="1"
+                    oninput="calculateVariables()"
+                >
+            </div>
+            <div class="slidecontainer">
+                Time:
+                <input
+                    type="range" class="slider" id="time"
+                    min="0" max="60" value="0" step="1"
+                >
+            </div>
+            <div id="buttons">
+                <label class="switch"><input type="checkbox" id="togBtn"><div class="slide round"></div></label>
+                <button id="reset">reset</button>
+            </div>
+        </div>
     </body>
 </html>

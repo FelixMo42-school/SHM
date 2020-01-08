@@ -18,8 +18,17 @@ canvas {
 }
 
 .overlay {
+    display: flex;
+}
+
+.left, .right {
     padding: 10px;
     width: 300px;
+}
+
+.right {
+    float: right;
+    margin-left: auto;
 }
 
 #states {

@@ -20,61 +20,70 @@
         <script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.min.js"></script>
     </head>
     <body>
-        <script src="index.js" type=></script>
+        <script src="index.js"></script>
+
+        <center>
+            <h1>Rotation Moment of Inertia Demonstrator</h1>
+            <h3>By: Felix Moses, Eliot Wachtel, Eliza ___ & Jonah Meier </h3>
+        </center>
 
         <div class="overlay">
-            <div class="slidecontainer">
-                <p>Pulley Radius: <span id="pulleyRad"></span> M</p>
-                <input
-                    type="range" class="slider" id="innerWheelRadius"
-                    min="0" max="100" value="50" step="1"
-                    oninput="calculateVariables()"
-                >
+            <div class="left">
+                <div class="slidecontainer">
+                    <p>Pulley Radius: <span id="pulleyRad"></span> M</p>
+                    <input
+                        type="range" class="slider" id="innerWheelRadius"
+                        min="0" max="100" value="50" step="1"
+                        oninput="calculateVariables()"
+                    >
+                </div>
+                <div class="slidecontainer">
+                    <p>Hanging Mass: <span id="HMass"></span> Kg</p>
+                    <input
+                        type="range" class="slider" id="mass"
+                        min="1" max="1000" value="100" step="1"
+                        oninput="calculateVariables()"
+                    >
+                </div>
+                <div class="slidecontainer">
+                    <p>Rotating Masses Mass: <span id="RMass"></span> Kg</p>
+                    <input
+                        type="range" class="slider" id="adjustableMass"
+                        min="1" max="100" value="10" step="1"
+                        oninput="calculateVariables()"
+                    >
+                </div>
+                <div class="slidecontainer">
+                    <p>Rotating Masses Distance From Center: <span id="RMassDist"></span> M</p>
+                    <input
+                        type="range" class="slider" id="adjustableMassRadius"
+                        min="0" max="100" value="50" step="1"
+                        oninput="calculateVariables()"
+                    >
+                </div>
+                <div class="slidecontainer">
+                    <p>Time: <span id="timeDisplay"></span> s</p>
+                    <input
+                        type="range" class="slider" id="time"
+                        min="0" max="60" value="0" step="1"
+                    >
+                </div>
+                <div id="buttons">
+                    <label class="switch"><input type="checkbox" id="togBtn"><div class="slide round"></div></label>
+                </div>
             </div>
-            <div class="slidecontainer">
-                <p>Hanging Mass: <span id="HMass"></span> Kg</p>
-                <input
-                    type="range" class="slider" id="mass"
-                    min="1" max="1000" value="100" step="1"
-                    oninput="calculateVariables()"
-                >
-            </div>
-            <div class="slidecontainer">
-                <p>Rotating Masses Mass: <span id="RMass"></span> Kg</p>
-                <input
-                    type="range" class="slider" id="adjustableMass"
-                    min="1" max="100" value="10" step="1"
-                    oninput="calculateVariables()"
-                >
-            </div>
-            <div class="slidecontainer">
-                <p>Rotating Masses Distance From Center: <span id="RMassDist"></span> M</p>
-                <input
-                    type="range" class="slider" id="adjustableMassRadius"
-                    min="0" max="100" value="50" step="1"
-                    oninput="calculateVariables()"
-                >
-            </div>
-            <div class="slidecontainer">
-                <p>Time: <span id="timeDisplay"></span> s</p>
-                <input
-                    type="range" class="slider" id="time"
-                    min="0" max="60" value="0" step="1"
-                >
-            </div>
-            <div id="buttons">
-                <label class="switch"><input type="checkbox" id="togBtn"><div class="slide round"></div></label>
-            </div>
-        </div>
 
-        <div id="stats">
-            <p>Moment of inertia: <span id="momentOfInertia"></span> KgM²</p>
-            <p>Aceleration: <span id="aceleration"></span> M/s²</p>
-        </div>
-
-        <div id="equations">
-            $ma = mg - T$<br>
-            $a = \frac{mg}{m + \frac{I}{r}}$
+            <div class="right">
+                <div id="stats">
+                    <p>Moment of inertia: <span id="momentOfInertia"></span> KgM²</p>
+                    <p>Aceleration: <span id="aceleration"></span> M/s²</p>
+                </div>
+        
+                <div id="equations">
+                    $ma = mg - T$<br>
+                    $a = \frac{mg}{m + \frac{I}{r}}$
+                </div>
+            </div>
         </div>
 
         <!-- renders all the LaTex equations -->

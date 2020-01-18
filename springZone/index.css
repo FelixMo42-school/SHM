@@ -1,0 +1,137 @@
+body {
+    margin: 0px;
+    overflow: hidden;
+
+    color: whitesmoke;
+    font-size: large;
+}
+
+canvas {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+}
+
+.equations {
+    right: 0px;
+}
+
+.overlay {
+    display: flex;
+}
+
+.left, .right {
+    padding: 10px;
+    width: 300px;
+}
+
+.right {
+    float: right;
+    margin-left: auto;
+}
+
+#states {
+    padding: 10px;
+    width: 300px;
+    float: right;
+}
+
+.slidecontainer {
+    padding-bottom: 15px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+/* checkbox style */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 34px;
+}
+
+.switch input {display:none;}
+
+.slide {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ca2222;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slide:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slide {
+    background-color: #2ab934;
+}
+
+input:focus + .slide {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slide:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(66px);
+}
+
+.slide:after {
+    content:'STOP';
+    color: white;
+    display: block;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    font-size: 10px;
+    font-family: Verdana, sans-serif;
+}
+
+input:checked + .slide:after {  
+    content: 'START';
+}
